@@ -20,7 +20,7 @@ Brief Description:
 #include <unistd.h> /* usleep */
 #include <stdarg.h> /* va_list, va_start, va_end*/
 
-#include "joshtime.h" /* LINE_LENGTH */
+#include "delayio.h" /* LINE_LENGTH */
 
 static int insertNewlines(char *string)
 {
