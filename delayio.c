@@ -1,20 +1,20 @@
-/****************************************************************************** 
+/******************************************************************************
 filename    delayio.c
-author      Joshua T. Fisher 
+author      Joshua T. Fisher
 email       j.fisher@digipen.edu
-  
-Brief Description: 
+
+Brief Description:
   This file contains functions for dealing with printing strings out char by
-  char. It's only public function (delayPrint) will take in a string with no 
-  newlines, and print it out character by character, with a specified delay in 
-  between in microseconds. It will also dynamically insert newlines as they're 
+  char. It's only public function (delayPrint) will take in a string with no
+  newlines, and print it out character by character, with a specified delay in
+  between in microseconds. It will also dynamically insert newlines as they're
   needed.
     - It will return 0 if operations completed successfully.
     - It will return 1 if malloc failed.
     - It will return 2 if it failed to place newlines "correctly".
-  
+
 ******************************************************************************/
-#include <stdio.h>  
+#include <stdio.h>
 #include <string.h> /* strcpy, strlen */
 #include <stdlib.h> /* calloc, free */
 #include <unistd.h> /* usleep */
@@ -25,7 +25,7 @@ Brief Description:
 static int insertNewlines(char *string)
 {
   /* Used to check the length of the string while iterating. */
-  int length = 1; 
+  int length = 1;
   /* Used to make sure we don't iterate behind our string. */
   int backwardslength = 1;
 
@@ -36,10 +36,10 @@ static int insertNewlines(char *string)
       ++length;
       ++backwardslength;
       ++string;
-      
+
     }
     else
-    {     
+    {
       if (*string != ' ')
       {
         --string;
@@ -61,8 +61,7 @@ static int insertNewlines(char *string)
   return 0;
 }
 
-/*
-static int vasprintf(char **strPtr, char *format, va_list argv) 
+static int vasprintf(char **strPtr, char *format, va_list argv)
 {
   int needed = vsnprintf((*strPtr = NULL), 0, format, argv);
 
@@ -73,7 +72,6 @@ static int vasprintf(char **strPtr, char *format, va_list argv)
 
   return vsprintf(*strPtr, format, argv);
 }
-*/
 
 int delayPrint(int delay, char *format, ...)
 {
@@ -100,10 +98,10 @@ int delayPrint(int delay, char *format, ...)
   {
     /* Put a character to the buffer. */
     putchar(*start);
-    
+
     /* Flush the stdout buffer so the character prints to the screen. */
     fflush(stdout);
-    
+
     /* Sleep for specified delay*/
     usleep(delay);
 
