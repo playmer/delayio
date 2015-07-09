@@ -65,7 +65,7 @@ static int vasprintf(char **strPtr, char *format, va_list argv)
 {
   int needed = vsnprintf((*strPtr = NULL), 0, format, argv);
 
-  if((needed < 0) || ((*strPtr = malloc(1 + needed)) == NULL))
+  if((needed < 0) || ((*strPtr = (char *)malloc(1 + needed)) == NULL))
   {
     return -1;
   }
